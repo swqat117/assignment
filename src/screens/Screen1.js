@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { View,FlatList,StyleSheet} from "react-native";
+import { View,FlatList,StyleSheet,ActivityIndicator} from "react-native";
 import { connect } from "react-redux";
 import * as actions from "../app/actions/loginActions";
 import SlotCard from "../app/components/Card";
@@ -50,9 +50,9 @@ class Screen1 extends Component {
     return (
       <View style={styles.container}>
           <View style={styles.subcontainer}> 
+          {this.props.isLoading ? <ActivityIndicator size="large" color="#0956e6" />:
                     <FlatList
                         style={styles.flatList}
-                       
                         data={filteredArray}
                         renderItem={this.renderItem}
                         ItemSeparatorComponent={()=> (
@@ -60,7 +60,6 @@ class Screen1 extends Component {
                           style={{
                             backgroundColor: "#ececec",
                             height: 1,
-                            marginTop:-2,
                             opacity: 1
                           }}
                         />
@@ -68,8 +67,8 @@ class Screen1 extends Component {
                         //getItemLayout={this.getItemLayout}
                         //ListHeaderComponent={this.renderHeader}
                       />
+                    }
                           </View>
-
       </View>
     );
   }
@@ -77,7 +76,7 @@ class Screen1 extends Component {
 
 const styles = StyleSheet.create({
   container: {backgroundColor:'#0f60cb',flex:1,padding:16},
-  subcontainer:{flex:1,marginTop:40, borderRadius:10,backgroundColor:'#fff'},
+  subcontainer:{flex:1,marginTop:40, borderRadius:10,backgroundColor:'#fff',justifyContent:'center',alignItems:'center'},
   flatList:{ backgroundColor: '#fff',paddingVertical:4,paddingHorizontal:2,borderRadius: 10}
 
 })
@@ -85,7 +84,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     posts: state.posts,
-    isLoading: state.isLoading,
+    isLoading: state.isEventLoading,
     error: state.error
   };
 }

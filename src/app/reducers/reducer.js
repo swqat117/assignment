@@ -1,6 +1,6 @@
 let initialState = {
   posts: [],
-  isEventLoading:false,
+  isEventLoading:true,
 };
 
 export default (quotes = (state = initialState, action) => {
